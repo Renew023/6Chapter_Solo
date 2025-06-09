@@ -11,18 +11,19 @@ public class DungeonSceneUI : MonoBehaviour
 	[SerializeField] private GameObject inventoryPanel;
 	[SerializeField] private Button inventoryOpenButton;
 	[SerializeField] private Button inventoryCloseButton;
+	[SerializeField] private GameObject ShopPanel;
+	[SerializeField] private Button shopOpenButton;
 	//정보
-    [SerializeField] private GameObject itemDataViewer;
+	[SerializeField] private GameObject itemDataViewer;
 	[SerializeField] private TextMeshProUGUI itemDataText;
 	[SerializeField] private Button itemEquipButton;
 
-	[SerializeField] private Button exitButton;
-
-	[SerializeField] private Image equipMark;
 	public void Awake()
 	{
 		inventoryOpenButton.onClick.AddListener(() => inventoryPanel.SetActive(true));
 		inventoryCloseButton.onClick.AddListener(() => inventoryPanel.SetActive(false));
+
+		shopOpenButton.onClick.AddListener(() => ShopPanel.SetActive(true));
 	}
 	public void Start()
 	{

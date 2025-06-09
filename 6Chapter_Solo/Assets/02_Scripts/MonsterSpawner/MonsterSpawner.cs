@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] private Enemy monsterPrefab;
 	[SerializeField] private Transform spawnPos;
-    [SerializeField] private int spawnCount = 5;
+	[SerializeField] private StageInfoPanel stageInfoPanel;
+
+	[SerializeField] private int curStage = 1;
+	[SerializeField] private int curRound = 1;
+	[SerializeField] private int stageRound = 1;
+	[SerializeField] private int spawnCount = 10;
+	[SerializeField] private int killCount = 0;
+
+	[SerializeField] private List<StageDataSO> stageDataSO;
 	[SerializeField][Range(10f, 20f)] private float minSpawnRadius = 10f;
 	[SerializeField][Range(10f, 40f)] private float maxSpawnRadius = 20f;
+
+	public int killStack = 0;
 
 	void Start()
     {
@@ -17,16 +26,46 @@ public class MonsterSpawner : MonoBehaviour
 		SpawnEnemy();
 	}
 
+	public void Kill()
+	{
+		killCount += 1;
+		stageInfoPanel.UpdateUI(curStage, curRound, spawnCount - killCount);
+		if (killCount == spawnCount)
+		{
+			curRound += 1;
+			if (curRound > stageRound)
+			{
+				curStage += 1;
+				curRound = 1;
+			}
+			killCount = 0;
+			SpawnEnemy();
+		}
+	}
+
     public void SpawnEnemy()
     {
-        for (int i = 0; i < spawnCount; i++)
-        {
-            Vector2 pos2 = Random.insideUnitCircle.normalized * Random.Range(minSpawnRadius, maxSpawnRadius);
-            Vector3 pos = new Vector3(pos2.x, 0, pos2.y);
+		StateMachineManager.Instance.Enemies.Clear();
+		foreach (var stage in stageDataSO)
+		{
+			if (stage.stageIndex == curStage)
+			{
+				spawnCount = stage.rounds[curRound - 1].spawnCount;
+				stageRound = stage.rounds.Count;
+				stageInfoPanel.UpdateUI(curStage, curRound, spawnCount - killCount);
+				for (int i = 0; i < spawnCount; i++)
+				{
+					Vector2 pos2 = Random.insideUnitCircle.normalized * Random.Range(minSpawnRadius, maxSpawnRadius);
+					Vector3 pos = new Vector3(pos2.x, 0, pos2.y);
 
-            Quaternion rot = Quaternion.LookRotation(spawnPos.position - pos);
-            StateMachineManager.Instance.Enemies.Add(Instantiate(monsterPrefab, pos, rot));
-			StateMachineManager.Instance.Enemies[i].Target = spawnPos;
+					Quaternion rot = Quaternion.LookRotation(spawnPos.position - pos);
+					int monster= Random.Range(0, stage.rounds[curRound - 1].enemyPrefabs.Count);
+					StateMachineManager.Instance.Enemies.Add(Instantiate(stage.rounds[curRound-1].enemyPrefabs[monster], pos, rot));
+					StateMachineManager.Instance.Enemies[i].Target = spawnPos;
+					StateMachineManager.Instance.Enemies[i].MonsterSpawner = this;
+				}
+				return;
+			}
 		}
     }
 

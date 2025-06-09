@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 	[SerializeField] private List<GameObject> itemObjectPrefabs;
 	[SerializeField] private GameObject goldPrefabs;
 	[SerializeField] private GameObject expPrefabs;
+	[SerializeField] private MonsterSpawner monsterSpawner;
 
 
 	[SerializeField] private EnemyStateMachine stateMachine;
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
 	public AnimationData AnimationData { get => animationData; }
 	public List<GameObject> ItemObjectPrefabs { get => itemObjectPrefabs;  }
 
+	public MonsterSpawner MonsterSpawner { get => monsterSpawner; set => monsterSpawner = value; }
 
 	public EnemyStateMachine StateMachine { get => stateMachine; }
 	public Animator Animator { get => animator; set => animator = value; }
@@ -54,7 +56,9 @@ public class Enemy : MonoBehaviour, ITakeDamage
 			Utility.Print("죽었습니다");
 			DropItem();
 			stateMachine.ChangeState(stateMachine.DeathState);
+			weapon.gameObject.SetActive(false);
 			target = null;
+			monsterSpawner.Kill();
 			StartCoroutine(DeathCoroutine());
 		}
 		data.StatDics[StatType.Health] = health;

@@ -13,8 +13,8 @@ public class ItemEquip
 
 public class Player : MonoBehaviour, ITakeDamage
 {
+	[SerializeField] private int maxHealth;
 	[SerializeField] private CharacterStatSO originalData;
-	[SerializeField] private CharacterStatSO maxData;
     [SerializeField] private CharacterStatSO data; //curData;
 	[SerializeField] public List<ItemEquip> itemEquip = new List<ItemEquip>();
 	[SerializeField] private AnimationData animationData;
@@ -26,11 +26,20 @@ public class Player : MonoBehaviour, ITakeDamage
 	[SerializeField] private Weapon weapon;
 
 	public CharacterStatSO OriginalData { get => data; }
-	public CharacterStatSO MaxData {get => maxData; set => maxData = value; }
 	public CharacterStatSO Data { get => data; set => data = value; }
 	public AnimationData AnimationData { get => animationData; }
 
-    public PlayerStateMachine StateMachine { get => stateMachine; }
+	public int MaxHealth
+	{
+		get => maxHealth;
+		set
+		{
+			Data.StatDics[StatType.Health] += value - maxHealth;
+			maxHealth = value;
+		}
+	}
+
+	public PlayerStateMachine StateMachine { get => stateMachine; }
 
 	public Animator Animator { get => animator; }
     public Transform Target { get => target; set => target = value; }
@@ -40,11 +49,11 @@ public class Player : MonoBehaviour, ITakeDamage
 	{
 		StateMachineManager.Instance.Player = this;
 		data = Instantiate(originalData);
-		maxData = Instantiate(originalData);
 		data.Init();
-		maxData.Init();
 		animationData.Initialize();
 		animator = GetComponent<Animator>();
+		maxHealth = (int)data.StatDics[StatType.Health];
+
 		weapon.gameObject.SetActive(false);
 
 		stateMachine = new PlayerStateMachine(this);

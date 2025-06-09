@@ -17,10 +17,17 @@ public class PlayerStatPanel : MonoBehaviour
 	[SerializeField] private Image expBar;
 	[SerializeField] private TextMeshProUGUI goldText;
 
+	void Start()
+	{
+		HpUIReload();
+		LevelUIReload();
+		GoldUIReload();
+	}
+
 	public void HpUIReload()
 	{
 		float hp = player.Data.StatDics[StatType.Health];
-		float maxHp = player.MaxData.StatDics[StatType.Health];
+		float maxHp = player.MaxHealth;
 		hpText.text = hp.ToString() + "/" + maxHp.ToString();
 		hpBar.fillAmount = hp/maxHp;
 	}

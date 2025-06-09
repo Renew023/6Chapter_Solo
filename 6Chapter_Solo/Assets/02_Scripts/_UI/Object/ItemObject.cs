@@ -71,10 +71,8 @@ public class ItemObject : MonoBehaviour
 				{
 					exp -= level * 5;
 					level += 1;
-					player.MaxData.StatDics[StatType.Level]++;
-					player.MaxData.StatDics[StatType.Health] += 10;
-					player.Data.StatDics[StatType.Health] += 10;
-					player.MaxData.StatDics[StatType.Attack] += 1;
+					player.Data.StatDics[StatType.Level]++;
+					player.MaxHealth += 10;
 					player.Data.StatDics[StatType.Attack] += 1;
 					//TODO : UI 분리 필요
 					Inventory.Instance.playerStatPanel.HpUIReload();
@@ -84,6 +82,7 @@ public class ItemObject : MonoBehaviour
 				player.Data.StatDics[StatType.Level] = level;
 				//TODO : UI 분리 필요
 				Inventory.Instance.playerStatPanel.LevelUIReload();
+				Inventory.Instance.shopPanel.UpdateUI();
 			}
 			//
 

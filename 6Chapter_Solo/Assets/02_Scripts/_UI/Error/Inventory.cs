@@ -12,6 +12,7 @@ public class Inventory : Singleton<Inventory>
 	public Dictionary<int, ItemSlot> ItemSlots = new Dictionary<int, ItemSlot>();
 	public DungeonSceneUI dungeonSceneUI;
 	public PlayerStatPanel playerStatPanel;
+	public ShopPanel shopPanel;
 	public Transform InventoryPanel;
     private ItemType viewInventoryType = ItemType.Equip;
 
