@@ -6,31 +6,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterStatSO", menuName = "ScriptableObjects/CharacterStat")]
 public class CharacterStatSO : ScriptableObject
 {
-	public List<StatData> stats;
-	public Dictionary<StatType, int> statDics;
+	public List<StatData> Stats;
+	public Dictionary<StatType, float> StatDics;
 
 	public void Init()
 	{
-		foreach(StatData stat in stats)
+		foreach(StatData stat in Stats)
 		{
-			if (statDics == null)
+			if (StatDics == null)
 			{
-				statDics = new Dictionary<StatType, int>();
+				StatDics = new Dictionary<StatType, float>();
 			}
-			statDics[stat.statType] = stat.baseValue;
+			StatDics[stat.StatType] = stat.BaseValue;
 		}
 	}
-	public int GetBaseValue(StatType statType)
-	{
-		Init();
-		return statDics.TryGetValue(statType, out var value) ? value : 0;
-	}
-
 }
 
 [Serializable]
 public class StatData
 {
-	public StatType statType;
-	public int baseValue;
+	public StatType StatType;
+	public float BaseValue;
 }

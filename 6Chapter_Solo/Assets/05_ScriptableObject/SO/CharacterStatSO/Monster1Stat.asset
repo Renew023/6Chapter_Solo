@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580fdee3ae3f03a4fbbe319e0fb1675d, type: 3}
   m_Name: Monster1Stat
   m_EditorClassIdentifier: 
-  stats:
-  - statType: 0
-    baseValue: 10
-  - statType: 2
-    baseValue: 5
-  - statType: 3
-    baseValue: 5
-  - statType: 1
-    baseValue: 100
+  Stats:
+  - StatType: 0
+    BaseValue: 30
+  - StatType: 2
+    BaseValue: 5
+  - StatType: 3
+    BaseValue: 2
+  - StatType: 4
+    BaseValue: 1
+  - StatType: 1
+    BaseValue: 20
+  - StatType: 6
+    BaseValue: 10
