@@ -14,12 +14,14 @@ public class PlayerAttackState : PlayerBaseState
 		StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
 		stateMachine.Player.Weapon.Damage = stateMachine.Player.Data.StatDics[StatType.Attack];
 		isAttackDamage = false;
+		CameraManager.Instance.SubCamOn();
 	}
 
 	public override void Exit() //Disable
 	{
 		base.Exit();
 		StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+		CameraManager.Instance.SubCamOff();
 	}
 	public override void Update() // 변하는 조건 + 행동.
 	{
