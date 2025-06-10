@@ -22,7 +22,6 @@ public class EnemyDeathState : EnemyBaseState
 	public override void Update() // 변하는 조건 + 행동.
 	{
 		base.Update();
-		Debug.Log("너는 죽어있다.");
 	}
 
 	public override void PhysicsUpdate()

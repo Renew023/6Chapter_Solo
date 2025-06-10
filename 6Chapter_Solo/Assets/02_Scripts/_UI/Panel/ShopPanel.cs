@@ -34,10 +34,10 @@ public class ShopPanel : MonoBehaviour
 
 	void Awake()
 	{
-		hpUpButton.onClick.AddListener(() => AddStat(StatType.Health));
-		damageUpButton.onClick.AddListener(() => AddStat(StatType.Attack));
-		speedUpButton.onClick.AddListener(() => AddStat(StatType.MoveSpeed));
-		closeButton.onClick.AddListener(() => gameObject.SetActive(false));
+		hpUpButton.OnClick(() => AddStat(StatType.Health));
+		damageUpButton.OnClick(() => AddStat(StatType.Attack));
+		speedUpButton.OnClick(() => AddStat(StatType.MoveSpeed));
+		closeButton.OnClick(() => gameObject.SetActive(false));
 	}
 
 	public void UpdateUI()

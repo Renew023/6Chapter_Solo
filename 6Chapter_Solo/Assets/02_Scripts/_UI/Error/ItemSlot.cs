@@ -14,7 +14,7 @@ public class ItemSlot : MonoBehaviour
 
     void Awake()
     {
-        showData.onClick.AddListener(() => Inventory.Instance.dungeonSceneUI.DataView(slotIndex));
+        showData.OnClick(() => Inventory.Instance.dungeonSceneUI.DataView(slotIndex));
     }
 
     public void Init(int index)

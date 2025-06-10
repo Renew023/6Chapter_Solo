@@ -76,6 +76,7 @@ public class ItemObject : MonoBehaviour
 					player.Data.StatDics[StatType.Attack] += 1;
 					//TODO : UI 분리 필요
 					Inventory.Instance.playerStatPanel.HpUIReload();
+					AudioManager.Instance.SFXSource_LevelUp.Play();
 				}
 
 				player.Data.StatDics[StatType.Exp] = exp;

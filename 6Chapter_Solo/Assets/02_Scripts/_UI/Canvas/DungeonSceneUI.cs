@@ -24,16 +24,16 @@ public class DungeonSceneUI : MonoBehaviour
 
 	public void Awake()
 	{
-		inventoryOpenButton.onClick.AddListener(() => inventoryPanel.SetActive(true));
-		inventoryCloseButton.onClick.AddListener(() => inventoryPanel.SetActive(false));
+		inventoryOpenButton.OnClick(() => inventoryPanel.SetActive(true));
+		inventoryCloseButton.OnClick(() => inventoryPanel.SetActive(false));
 
-		shopOpenButton.onClick.AddListener(() => shopPanel.SetActive(true));
+		shopOpenButton.OnClick(() => shopPanel.SetActive(true));
 
-		stageSelectButton.onClick.AddListener(() => stageSelectPanel.SetActive(true));
+		stageSelectButton.OnClick(() => stageSelectPanel.SetActive(true));
 	}
 	public void Start()
 	{
-		itemEquipButton.onClick.AddListener(() => Equip(Inventory.Instance.CheckIndex));
+		itemEquipButton.OnClick(() => Equip(Inventory.Instance.CheckIndex));
 	}
 	public void Equip(int index)
 	{

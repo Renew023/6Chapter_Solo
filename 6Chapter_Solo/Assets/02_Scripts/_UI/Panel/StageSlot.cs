@@ -16,6 +16,6 @@ public class StageSlot : MonoBehaviour
 	void Start()
     {
         stageLevel.text = "Stage - " + slotIndex;
-        stageSelect.onClick.AddListener(() => monsterSpawner.SelectStage(slotIndex));
+        stageSelect.OnClick(() => monsterSpawner.SelectStage(slotIndex));
 	}
 }

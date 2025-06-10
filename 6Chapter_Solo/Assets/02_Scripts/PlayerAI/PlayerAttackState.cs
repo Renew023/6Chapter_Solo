@@ -32,14 +32,15 @@ public class PlayerAttackState : PlayerBaseState
 		}
 
 		float normalizeTime = GetNormalizedTime(stateMachine.Player.Animator, "Attack");
-		
+		Debug.Log(normalizeTime);
 		if (normalizeTime < 1f)
 		{
-			if (normalizeTime < 0.9f && normalizeTime >= 0.1f && !isAttackDamage)
+			if (normalizeTime < 0.9f && normalizeTime >= 0.3f && !isAttackDamage)
 			{
 				//웨폰 켜준다
 				Debug.Log("켜짐");
 				stateMachine.Player.Weapon.gameObject.SetActive(true);
+				AudioManager.Instance.SFXSource_Attack.Play();
 				isAttackDamage = true;
 			}
 
@@ -48,6 +49,7 @@ public class PlayerAttackState : PlayerBaseState
 				//웨폰 거준다
 				Debug.Log("꺼짐");
 				stateMachine.Player.Weapon.enabled = false;
+				AudioManager.Instance.SFXSource_Attack.Stop();
 				isAttackDamage = false;
 			}
 

@@ -11,12 +11,14 @@ public class PlayerMoveState : PlayerBaseState
 	{
 		base.Enter();
 		StartAnimation(stateMachine.Player.AnimationData.MoveParameterHash);
+		AudioManager.Instance.SFXSource_Running.Play();
 	}
 
 	public override void Exit() //Disable
 	{
 		base.Exit();
 		StopAnimation(stateMachine.Player.AnimationData.MoveParameterHash);
+		AudioManager.Instance.SFXSource_Running.Stop();
 	}
 	public override void Update() // 변하는 조건 + 행동.
 	{

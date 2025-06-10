@@ -20,6 +20,6 @@ public class StageSelectPanel : MonoBehaviour
 			prefabList[i].GetComponent<StageSlot>().MonsterSpawner = stageDataList;
 			prefabList[i].GetComponent<StageSlot>().SlotIndex = stageDataList.StageDataSO[i].stageIndex;
 		}
-		closeButton.onClick.AddListener(() => gameObject.SetActive(false));
+		closeButton.OnClick(() => gameObject.SetActive(false));
 	}
 }
