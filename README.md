@@ -1,10 +1,7 @@
 # 🎮 6Chapter_Solo – 3D 방치형 RPG 구현
-
-Unity 기반 3D 방치형 RPG 게임 구현 프로젝트입니다. 다양한 시스템을 유기적으로 연결하여 RPG의 기본 구조를 설계하고, 방치형 요소까지 고려한 개인 프로젝트입니다.
-
 ---
 
-## ✅ 주요 기능
+## ✅ 과제 기능
 
 ### 🔹 필수 구현
 
@@ -74,4 +71,36 @@ Unity 기반 3D 방치형 RPG 게임 구현 프로젝트입니다. 다양한 시
 ---
 
 ### 🔊 사운드 이펙트
-- 공격, 이동
+- 공격, 이동, 사망, 버튼 클릭, 레벨업 등 상황별 효과음 구현  
+- `AudioManager`를 싱글턴화하여 모든 시스템과 연결
+
+---
+
+### 💾 저장 및 로드 시스템
+- 제네릭 메서드 기반 저장 시스템  
+- `Setting`, `Inventory`, `Player`, `Stage`, `ShopData` 등 필요한 값만 구조체로 저장  
+![Save/Load](https://github.com/user-attachments/assets/abc22158-3775-4bbf-8a1a-210d8ec59713)
+
+---
+
+## 🛠️ 기술 스택 및 설계
+
+| 기술 요소 | 설명 |
+|----------|------|
+| `StateMachine` 패턴 | 플레이어 및 몬스터 상태 제어 |
+| 확장 메서드 | Button에 사운드 효과 할당 등 |
+| 키 상수 관리 | 애니메이션 및 저장 키의 string/Hash 관리 |
+| `ScriptableObject` 구조 설계 | 역할 분리 및 유지보수 고려 |
+| Update 최적화 | 각 객체 Update → `StateMachineManager`에서 통합 관리 |
+
+---
+
+## 🐞 트러블슈팅
+
+### 🎯 애니메이션 타격 오류 (2025.06.10)
+
+- **문제:** 공격 애니메이션이 `normalizeTime = 1.0` 전에 중단  
+- **원인:** `HasExitTime` 설정만으로는 부족, `Transition Duration` 값 영향  
+- **해결:** 해당 애니메이션의 `Transition Duration`을 `0`으로 수정하여 정확한 종료 처리  
+
+---
