@@ -27,5 +27,20 @@ public class AnimationData
 		AttackParameterHash = Animator.StringToHash(attackParameterName);
 		DeathParameterHash = Animator.StringToHash(deathParameterName);
 	}
+}
 
+[SerializeField]
+public class SaveData
+{
+	[SerializeField] private string settingDataName = "SettingData";
+	[SerializeField] private string inventoryDataName = "InventoryData";
+	[SerializeField] private string playerDataName = "PlayerData";
+	[SerializeField] private string stageDataName = "StageData";
+	[SerializeField] private string shopDataName = "ShopData";
+
+	public string SettingDataName { get => settingDataName; }
+	public string InventoryDataName { get => inventoryDataName; }
+	public string PlayerDataName { get => playerDataName; }
+	public string StageDataName { get => stageDataName; }
+	public string ShopDataName { get => shopDataName; }
 }

@@ -11,8 +11,12 @@ public class DungeonSceneUI : MonoBehaviour
 	[SerializeField] private GameObject inventoryPanel;
 	[SerializeField] private Button inventoryOpenButton;
 	[SerializeField] private Button inventoryCloseButton;
-	[SerializeField] private GameObject ShopPanel;
+
+	[SerializeField] private GameObject shopPanel;
 	[SerializeField] private Button shopOpenButton;
+	
+	[SerializeField] private GameObject stageSelectPanel;
+	[SerializeField] private Button stageSelectButton;
 	//정보
 	[SerializeField] private GameObject itemDataViewer;
 	[SerializeField] private TextMeshProUGUI itemDataText;
@@ -23,7 +27,9 @@ public class DungeonSceneUI : MonoBehaviour
 		inventoryOpenButton.onClick.AddListener(() => inventoryPanel.SetActive(true));
 		inventoryCloseButton.onClick.AddListener(() => inventoryPanel.SetActive(false));
 
-		shopOpenButton.onClick.AddListener(() => ShopPanel.SetActive(true));
+		shopOpenButton.onClick.AddListener(() => shopPanel.SetActive(true));
+
+		stageSelectButton.onClick.AddListener(() => stageSelectPanel.SetActive(true));
 	}
 	public void Start()
 	{

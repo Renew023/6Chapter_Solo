@@ -18,6 +18,8 @@ public class MonsterSpawner : MonoBehaviour
 	[SerializeField][Range(10f, 20f)] private float minSpawnRadius = 10f;
 	[SerializeField][Range(10f, 40f)] private float maxSpawnRadius = 20f;
 
+	public List<StageDataSO> StageDataSO { get => stageDataSO; set => stageDataSO = value; }
+
 	public int killStack = 0;
 
 	void Start()
@@ -38,14 +40,35 @@ public class MonsterSpawner : MonoBehaviour
 				curStage += 1;
 				curRound = 1;
 			}
-			killCount = 0;
+			if(curStage > stageDataSO.Count)
+			{
+				curStage = 1; // Reset to first stage if all stages are completed
+			}
+			Reset();
 			SpawnEnemy();
 		}
 	}
 
+	public void Reset()
+	{
+		foreach (var enemy in StateMachineManager.Instance.Enemies)
+		{
+			enemy.gameObject.SetActive(false);
+		}
+		StateMachineManager.Instance.Enemies.Clear();
+		killCount = 0;
+	}
+
+	public void SelectStage(int selectStage)
+	{
+		curStage = selectStage;
+		curRound = 1;
+		Reset();
+		SpawnEnemy();
+	}
+
     public void SpawnEnemy()
     {
-		StateMachineManager.Instance.Enemies.Clear();
 		foreach (var stage in stageDataSO)
 		{
 			if (stage.stageIndex == curStage)
