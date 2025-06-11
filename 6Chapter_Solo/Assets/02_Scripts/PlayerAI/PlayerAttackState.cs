@@ -14,6 +14,7 @@ public class PlayerAttackState : PlayerBaseState
 		StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
 		stateMachine.Player.Weapon.Damage = stateMachine.Player.Data.StatDics[StatType.Attack];
 		isAttackDamage = false;
+		CameraManager.Instance.ChangeCam(Cam.sub);
 	}
 
 	public override void Exit() //Disable

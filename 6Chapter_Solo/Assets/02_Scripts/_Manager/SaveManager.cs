@@ -20,40 +20,42 @@ public class SaveManager : Singleton<SaveManager>
 		File.WriteAllText(jsonPath, jsonData);
 	}
 
-	public void TryLoadJson<T>(out T data, string fileName) // Read -> FromJson
+	public bool TryLoadJson<T>(out T data, string fileName) // Read -> FromJson
 	{
 		string jsonPath = Application.persistentDataPath + $"{fileName}.json";
 		if (File.Exists(jsonPath))
 		{
 			string jsonData = File.ReadAllText(jsonPath);
 			data = JsonUtility.FromJson<T>(jsonData);
+			return true;
 		}
 		data = default;
+		return false;
 	}
 }
 
-[SerializeField]
+[System.Serializable]
 public struct SettingData
 {
 	public float curBGMVolume;
 	public float curSFXVolume;
 }
 
-[SerializeField]
-public struct InventoryData
+[System.Serializable]
+public class InventoryData
 {
 	public List<InventoryItemData> itemSlot;
 }
 
-[SerializeField]
-public struct InventoryItemData
+[System.Serializable]
+public class InventoryItemData
 {
 	public int itemIndex;
 	public int value;
 }
 
-[SerializeField]
-public struct PlayerData
+[System.Serializable]
+public class PlayerData
 {
 	public int playerLevel;
 	public int playerExp;
@@ -64,16 +66,16 @@ public struct PlayerData
 	public float MoveSpeed;
 }
 
-[SerializeField]
-public struct StageData
+[System.Serializable]
+public class StageData
 {
 	public int curStage;
 	public int curRound;
 	public int killCount;
 }
 
-[SerializeField]
-public struct ShopData
+[System.Serializable]
+public class ShopData
 {
 	public int hpUpLevel;
 	public int damageUpLevel;

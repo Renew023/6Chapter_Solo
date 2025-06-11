@@ -29,7 +29,7 @@ public class AnimationData
 	}
 }
 
-[SerializeField]
+[Serializable]
 public class SaveData
 {
 	[SerializeField] private string settingDataName = "SettingData";

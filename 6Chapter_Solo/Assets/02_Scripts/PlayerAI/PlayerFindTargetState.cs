@@ -12,6 +12,7 @@ public class PlayerFindTargetState : PlayerBaseState
 	{
 		base.Enter();
 		StartAnimation(stateMachine.Player.AnimationData.FindParameterHash);
+		CameraManager.Instance.ChangeCam(Cam.main);
 	}
 
 	public override void Exit() //Disable

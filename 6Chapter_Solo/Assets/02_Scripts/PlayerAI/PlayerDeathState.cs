@@ -12,6 +12,7 @@ public class PlayerDeathState : PlayerBaseState
 	{
 		base.Enter();
 		StartAnimation(stateMachine.Player.AnimationData.DeathParameterHash);
+		CameraManager.Instance.ChangeCam(Cam.death);
 	}
 
 	public override void Exit() //Disable
