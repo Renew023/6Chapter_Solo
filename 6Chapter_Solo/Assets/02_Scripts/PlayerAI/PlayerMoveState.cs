@@ -12,6 +12,7 @@ public class PlayerMoveState : PlayerBaseState
 		base.Enter();
 		StartAnimation(stateMachine.Player.AnimationData.MoveParameterHash);
 		AudioManager.Instance.SFXSource_Running.Play();
+		CameraManager.Instance.ChangeCam(Cam.main);
 	}
 
 	public override void Exit() //Disable

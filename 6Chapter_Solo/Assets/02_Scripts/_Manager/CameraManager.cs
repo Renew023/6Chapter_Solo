@@ -3,18 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Cam
+{
+    main,
+    sub,
+    death,
+}
+
 public class CameraManager : Singleton<CameraManager>
 {
     [SerializeField] private CinemachineVirtualCamera mainCam;
     [SerializeField] private CinemachineVirtualCamera subCam;
+    [SerializeField] private CinemachineVirtualCamera deathCam;
 
-    public void SubCamOn()
+    public void ChangeCam(Cam cam)
     {
-        subCam.Priority = 20;
-    }
-
-    public void SubCamOff()
-    {
-        subCam.Priority = 5;
-    }
+        mainCam.Priority = (cam == Cam.main) ? 20 : 5;
+		subCam.Priority = (cam == Cam.sub) ? 20 : 5;
+		deathCam.Priority = (cam == Cam.death) ? 20 : 5;
+	}
 }
