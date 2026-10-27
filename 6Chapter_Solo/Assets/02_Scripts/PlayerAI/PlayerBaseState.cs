@@ -72,7 +72,7 @@ public class PlayerBaseState : IState
 
 	public virtual void Enter()
 	{
-		
+
 	}
 
 	public virtual void Exit()

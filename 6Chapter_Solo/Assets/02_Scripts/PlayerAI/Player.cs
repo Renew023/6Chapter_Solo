@@ -77,8 +77,12 @@ public class Player : MonoBehaviour, ITakeDamage
 	{
 		if (SaveManager.Instance.TryLoadJson(out playerData, saveData.PlayerDataName))
 		{
-			MaxHealth = playerData.playerMaxHP;
-			data.StatDics[StatType.Health] = playerData.playerMaxHP;
+			Debug.Log("플레이어 데이터 불러오기 성공");
+			Debug.Log(playerData.playerLevel);
+
+			maxHealth = playerData.playerMaxHP;
+			data.StatDics[StatType.Health] = playerData.playerCurHP;
+			Debug.Log(data.StatDics[StatType.Health]);
 			data.StatDics[StatType.Level] = playerData.playerLevel;
 			data.StatDics[StatType.Exp] = playerData.playerExp;
 			data.StatDics[StatType.Gold] = playerData.playerGold;
@@ -90,7 +94,7 @@ public class Player : MonoBehaviour, ITakeDamage
 	public void PlayerDataSave()
 	{
 		// 데이터 저장 시점 : 레벨업 시, 아이템 구매 시, 피해 입을 시
-		playerData.playerMaxHP = MaxHealth;
+		playerData.playerMaxHP = maxHealth;
 		playerData.playerCurHP = (int)data.StatDics[StatType.Health];
 		playerData.playerLevel = (int)data.StatDics[StatType.Level];
 		playerData.playerExp = (int)data.StatDics[StatType.Exp];
